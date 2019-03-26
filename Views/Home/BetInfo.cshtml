@@ -1,0 +1,53 @@
+<h1>Bet Info Page</h1>
+<h3>Title:</h3>
+<h6>@ViewBag.thisBet.Title</h6>
+<h3>Description:</h3>
+<h6>@ViewBag.thisBet.Description</h6>
+<h3>Amount:</h3>
+<h6>@ViewBag.thisBet.Amount</h6>
+<h3>Closing Date:</h3>
+<h6>@ViewBag.thisBet.ClosingDate</h6>
+<h3>Originator:</h3>
+<h6>@ViewBag.thisBet.User.FirstName @ViewBag.thisBet.User.LastName</h6>
+<h1>Add Bets To Favorites</h1>
+<button><a href="/addfavorite/@ViewBag.thisBet.BetId/@ViewBag.userId">Favorite</a></button>
+<h1>List of Messages</h1>
+<table>
+  <tr>
+    <th>Message</th>
+    <th>Post Time</th>
+    <th>Author</th>
+  </tr>
+
+  @foreach(var mes in ViewBag.listOfMessages)
+  { 
+      @foreach(var sage in mes.listOfMessages)
+      {
+        @if(sage.BetId == ViewBag.ThisBet.BetId)
+        {
+            <tr>
+              <td>@sage.Contents</td>
+              <td>@sage.CreatedAt</td>
+              <td>@sage.User.FirstName</td>
+            </tr>
+        }
+      }
+  }
+
+</table>
+
+
+<h1>Add a Message</h1>
+@model Message
+<span asp-validation-for="Contents"></span><br>
+<form asp-action="AddMessage" asp-controller="Home" method="post">
+
+    <label asp-for="Contents"></label>
+    <input asp-for="Contents">
+    <br>
+
+    <input type="hidden" name="BetId" value="@ViewBag.thisBet.BetId">
+    <input type="hidden" name="UserId" value="@ViewBag.userId">
+
+    <input type="submit" value="Post Message">
+</form>

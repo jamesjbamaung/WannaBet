@@ -1,0 +1,53 @@
+<head>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+<h1>Welocome to the Activity Board</h1>
+<p><a href="/logout">Logout</a></p>
+<button><a href="/betform">Make a Bet</a></button>
+<h2>Hello @ViewBag.User.FirstName</h2>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Originator</th>
+    <th>Closing Date</th>
+    <th>Reserve Count</th>
+    <th>Reserve</th>
+  </tr>
+
+  @foreach(var bet in ViewBag.AllBets)
+  {
+  <tr>
+    <td><a href="/bet/@bet.BetId">@bet.Title</a></td>
+    <td>@bet.Description</td>
+    <td>@bet.Amount</td>
+    <td><a href="/userinfo/@bet.User.UserId">@bet.User.FirstName</a></td>
+    <td>@bet.ClosingDate</td>
+    <td>@bet.listOfParticipants.Count</td>
+    <td><a href="/reservebet/@bet.BetId/@bet.UserId">Take It</a></td>
+  </tr>
+
+
+
+  }
+
+</table>

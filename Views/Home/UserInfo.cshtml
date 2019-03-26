@@ -1,0 +1,10 @@
+<h1>User Info Page</h1>
+<h3>@ViewBag.user.FirstName @ViewBag.user.LastName</h3>
+<h3>Number of Followers: @ViewBag.user.listOfFollowers.Count</h3>
+<h1>Follow this User </h1>
+@model Follow
+<form asp-action="AddFollow" asp-controller="Home" method="post">
+    <input type="hidden" name="FollowerId" value="@ViewBag.userInSession.UserId">
+    <input type="hidden" name="FollowedId" value="@ViewBag.user.UserId">
+    <input type="submit" value="Follow">
+</form>
