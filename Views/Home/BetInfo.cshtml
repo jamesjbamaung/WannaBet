@@ -17,6 +17,7 @@
     <th>Message</th>
     <th>Post Time</th>
     <th>Author</th>
+    <th>Action</th>
   </tr>
 
   @foreach(var mes in ViewBag.listOfMessages)
@@ -29,8 +30,18 @@
               <td>@sage.Contents</td>
               <td>@sage.CreatedAt</td>
               <td>@sage.User.FirstName</td>
+            @if(sage.UserId == ViewBag.userId)
+            {
+                <td><button><a href="/deletemessage/@sage.MessageId">Delete</a></button></td>
+            }
+            else
+            {
+                <td>Null</td>
+            }
+
             </tr>
         }
+
       }
   }
 

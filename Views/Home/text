@@ -1,12 +1,8 @@
-@model Follow
-<h1>User Info Page</h1>
-<h3>@ViewBag.user.FirstName @ViewBag.user.LastName</h3>
-<h3>Number of Followers: @ViewBag.user.listOfFollows.Count</h3>
 @{
     bool action = false;
     int fid = 0;
 }
-@foreach(var fol in ViewBag.user.listOfFollows)
+@foreach(var fol in ViewBag.user.listOfFollowers)
 {
 
 
@@ -28,11 +24,4 @@
 @if(action == true)
 {
     <button><a href="/unfollow/@fid">UnFollow</a></button>
-}
-
-
-@foreach(var bet in ViewBag.userBets.BetterBets)
-{
-    <h3>@bet.Bet.Title</h3>
-    <p>@bet.Bet.Description</p>
 }

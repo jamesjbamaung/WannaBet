@@ -36,6 +36,8 @@
 
   @foreach(var bet in ViewBag.AllBets)
   {
+    int val = 0;
+    int rid = 0;
   <tr>
     <td><a href="/bet/@bet.BetId">@bet.Title</a></td>
     <td>@bet.Description</td>
@@ -43,7 +45,31 @@
     <td><a href="/userinfo/@bet.User.UserId">@bet.User.FirstName</a></td>
     <td>@bet.ClosingDate</td>
     <td>@bet.listOfParticipants.Count</td>
-    <td><a href="/reservebet/@bet.BetId/@bet.UserId">Take It</a></td>
+    @foreach(var user in bet.listOfParticipants)
+    {
+      @if(user.BetterId == ViewBag.id)
+      {
+        val = 1;
+      }
+      else if(user.TakerId == ViewBag.id)
+      {
+        val = 2;
+        rid = user.ReserveId;
+      }
+    }
+    @if(val == 0)
+    {
+      <td><a href="/reservebet/@bet.BetId/@bet.UserId">Take it</a></td>
+    }
+    else if(val == 1)
+    {
+      <td><a href="/deletebet/@bet.BetId">Delete</a></td>
+    }
+    else if(val == 2)
+    {
+      <td><a href="/cancelreserve/@rid">Unreserve it</a></td>
+    }
+    
   </tr>
 
 

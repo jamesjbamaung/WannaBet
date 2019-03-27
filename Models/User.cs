@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 
 public class User
 {
@@ -22,6 +24,7 @@ public class User
     [Compare("Password")]
     [DataType(DataType.Password)]
     public string Confirm {get;set;}
+    public string ProfilePic { get; set; }
     [InverseProperty("Better")]
     public List<Reserve> BetterBets { get; set; }
     [InverseProperty("Taker")]

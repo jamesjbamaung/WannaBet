@@ -199,23 +199,50 @@ namespace WannaBet.Controllers
             
             return RedirectToAction("BetInfo", new { bid = mess.BetId });
         }
+        [HttpGet("deletemessage/{mid}")]
+        public IActionResult DeleteMessage(int mid)
+        {
+            System.Console.WriteLine(mid);
+            Message delete = dbContext.Messages.FirstOrDefault(a => a.MessageId == mid);
+            int id = delete.BetId;
+            dbContext.Remove(delete);
+            dbContext.SaveChanges();
+            System.Console.WriteLine("1-1-1-1-1-1-1-1-1-1-1-1-1");
+            System.Console.WriteLine("deleted message");
+            return RedirectToAction("BetInfo", new { bid = id });
+        }
         [HttpGet("userinfo/{uid}")]
         public IActionResult UserInfo(int uid)
         {
-            ViewBag.user = dbContext.Users.Include(a => a.listOfFollowers).ThenInclude(b => b.Follower).FirstOrDefault(c => c.UserId == uid);
+            ViewBag.user = dbContext.Users.Include(a => a.listOfFollows).ThenInclude(b => b.Follower).FirstOrDefault(c => c.UserId == uid);
+            ViewBag.userBets = dbContext.Users.Include(a => a.BetterBets).ThenInclude(b => b.Bet).FirstOrDefault(c => c.UserId == uid);
             ViewBag.userInSession = dbContext.Users.FirstOrDefault(b => b.UserId == HttpContext.Session.GetInt32("userInSession"));
             return View();
         }
         [HttpPost("addfollow")]
         public IActionResult AddFollow(Follow fol)
         {
+            System.Console.WriteLine(fol.FollowerId);
+            System.Console.WriteLine(fol.FollowedId);
             User follower = dbContext.Users.FirstOrDefault(a => a.UserId == fol.FollowerId);
             User followed = dbContext.Users.FirstOrDefault(b => b.UserId == fol.FollowedId);
             fol.Follower = follower;
             fol.Followed = followed;
             dbContext.Add(fol);
             dbContext.SaveChanges();
+            Console.WriteLine("/././././././././././././././././././././.");
+            Console.WriteLine("added a follow");
             return RedirectToAction("UserInfo", new { uid = fol.FollowedId });
+        }
+        [HttpGet("unfollow/{fid}")]
+        public IActionResult UnFollow(int fid)
+        {
+            Follow delete = dbContext.Follows.FirstOrDefault(a => a.FollowId == fid);
+            int num = delete.FollowedId;
+            dbContext.Remove(delete);
+            dbContext.SaveChanges();
+            return RedirectToAction("UserInfo", new { uid = num });
+
         }
         [HttpGet("addfavorite/{bid}/{uid}")]
         public IActionResult AddFavorite(int bid, int uid)
@@ -233,6 +260,22 @@ namespace WannaBet.Controllers
             Console.WriteLine("-/-/-/-/-/-/-/-/-/-/-/-/-/--/-/-/-/-/");
 
             return RedirectToAction("BetInfo", new { bid = newFav.BetId });
+        }
+        [HttpGet("deletebet/{bid}")]
+        public IActionResult DeleteBet(int bid)
+        {
+            Bet canceled = dbContext.Bets.FirstOrDefault(a => a.BetId == bid);
+            dbContext.Remove(canceled);
+            dbContext.SaveChanges();
+            return RedirectToAction("Account", new { id = HttpContext.Session.GetInt32("userInSession") });
+        }
+        [HttpGet("cancelreserve/{rid}")]
+        public IActionResult CancelReserve(int rid)
+        {
+            Reserve canceled = dbContext.Reserves.FirstOrDefault(a => a.ReserveId == rid);
+            dbContext.Remove(canceled);
+            dbContext.SaveChanges();
+            return RedirectToAction("Account", new { id = HttpContext.Session.GetInt32("userInSession") });
         }
     }
 }
