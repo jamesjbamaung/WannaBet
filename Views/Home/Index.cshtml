@@ -1,266 +1,405 @@
-﻿<!DOCTYPE html>
+﻿@model User
+<!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <style>
-        #register {
-            display: inline-block;
-            background: #fff;
-            border-radius: 3px;
-            border: 1px solid #ccc;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
-            width: 340px;
-            min-height: 280px;
+<body class="index">
+    
+    
+    <!-- Styleswitcher
+================================================== -->
+        <div class="colors-switcher">
+            <a id="show-panel" class="hide-panel"><i class="fa fa-tint"></i></a>        
+                <ul class="colors-list">
+                    <li><a title="Light Red" onClick="setActiveStyleSheet('light-red'); return false;" class="light-red"></a></li>
+                    <li><a title="Blue" class="blue" onClick="setActiveStyleSheet('blue'); return false;"></a></li>
+                    <li class="no-margin"><a title="Light Blue" onClick="setActiveStyleSheet('light-blue'); return false;" class="light-blue"></a></li>
+                    <li><a title="Green" class="green" onClick="setActiveStyleSheet('green'); return false;"></a></li>
+                    
+                    <li class="no-margin"><a title="light-green" class="light-green" onClick="setActiveStyleSheet('light-green'); return false;"></a></li>
+                    <li><a title="Yellow" class="yellow" onClick="setActiveStyleSheet('yellow'); return false;"></a></li>
+                    
+                </ul>
 
-        }
+        </div>  
+<!-- Styleswitcher End
+================================================== -->
 
-        #login {
-            vertical-align: top;
-            margin-left: 100px;
-            display: inline-block;
-            background: #fff;
-            border-radius: 3px;
-            border: 1px solid #ccc;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
-            width: 340px;
-            height: 295px;
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Wanna Bet?</a>
+            </div>
 
-        }
-
-        /* Basics */
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            font-family: "Helvetica Neue", Helvetica, sans-serif;
-            color: #444;
-            -webkit-font-smoothing: antialiased;
-            background: #f0f0f0;
-        }
-
-        #container {
-            position: fixed;
-            width: 340px;
-            height: 280px;
-            top: 50%;
-            left: 50%;
-            margin-top: -140px;
-            margin-left: -170px;
-            background: #fff;
-            border-radius: 3px;
-            border: 1px solid #ccc;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
-
-        }
-
-        form {
-            margin: 0 auto;
-            margin-top: 20px;
-        }
-
-        label {
-            color: #555;
-            display: inline-block;
-            margin-left: 18px;
-            padding-top: 10px;
-            font-size: 14px;
-        }
-
-        p a {
-            font-size: 11px;
-            color: #aaa;
-            float: right;
-            margin-top: -13px;
-            margin-right: 20px;
-            -webkit-transition: all .4s ease;
-            -moz-transition: all .4s ease;
-            transition: all .4s ease;
-        }
-
-        p a:hover {
-            color: #555;
-        }
-
-        input {
-            font-family: "Helvetica Neue", Helvetica, sans-serif;
-            font-size: 12px;
-            outline: none;
-        }
-
-        input[type=text],
-        input[type=password] {
-            color: #777;
-            padding-left: 10px;
-            margin: 10px;
-            margin-top: 12px;
-            margin-left: 18px;
-            width: 290px;
-            height: 35px;
-            border: 1px solid #c7d0d2;
-            border-radius: 2px;
-            box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8;
-            -webkit-transition: all .4s ease;
-            -moz-transition: all .4s ease;
-            transition: all .4s ease;
-        }
-
-        input[type=text]:hover,
-        input[type=password]:hover {
-            border: 1px solid #b6bfc0;
-            box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .7), 0 0 0 5px #f5f7f8;
-        }
-
-        input[type=text]:focus,
-        input[type=password]:focus {
-            border: 1px solid #a8c9e4;
-            box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #e6f2f9;
-        }
-
-        #lower {
-            background: #ecf2f5;
-            width: 100%;
-            height: 69px;
-            margin-top: 20px;
-            box-shadow: inset 0 1px 1px #fff;
-            border-top: 1px solid #ccc;
-            border-bottom-right-radius: 3px;
-            border-bottom-left-radius: 3px;
-        }
-
-        input[type=checkbox] {
-            margin-left: 20px;
-            margin-top: 30px;
-        }
-
-        .check {
-            margin-left: 3px;
-            font-size: 11px;
-            color: #444;
-            text-shadow: 0 1px 0 #fff;
-        }
-
-        input[type=submit] {
-            float: right;
-            margin-right: 130px;
-            margin-top: 20px;
-            width: 80px;
-            height: 30px;
-            font-size: 14px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #acd6ef;
-            /*IE fallback*/
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#acd6ef), to(#6ec2e8));
-            background-image: -moz-linear-gradient(top left 90deg, #acd6ef 0%, #6ec2e8 100%);
-            background-image: linear-gradient(top left 90deg, #acd6ef 0%, #6ec2e8 100%);
-            border-radius: 30px;
-            border: 1px solid #66add6;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
-            cursor: pointer;
-        }
-
-        input[type=submit]:hover {
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#b6e2ff), to(#6ec2e8));
-            background-image: -moz-linear-gradient(top left 90deg, #b6e2ff 0%, #6ec2e8 100%);
-            background-image: linear-gradient(top left 90deg, #b6e2ff 0%, #6ec2e8 100%);
-        }
-
-        input[type=submit]:active {
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#6ec2e8), to(#b6e2ff));
-            background-image: -moz-linear-gradient(top left 90deg, #6ec2e8 0%, #b6e2ff 100%);
-            background-image: linear-gradient(top left 90deg, #6ec2e8 0%, #b6e2ff 100%);
-        }
-
-        #main {
-            margin-right: auto;
-            display: flex;
-            justify-content: center;
-        }
-
-        #background {
-            background-color: rgb(179, 226, 255);
-        }
-
-        #forgot {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-@model User
-
-<body id="background">
-    <div class="jumbotron text-center">
-        <h1>CSharp Exam</h1>
-    </div>
-    <div id="main">
-        <div id="register">
-
-            <form asp-action="Register" asp-controller="Home" method="post">
-                <span asp-validation-for="FirstName"></span><br>
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName">
-                <br>
-
-                <span asp-validation-for="LastName"></span><br>
-                <label asp-for="LastName"></label>
-                <input asp-for="LastName">
-                <br>
-
-                <span asp-validation-for="Email"></span><br>
-                <label asp-for="Email"></label>
-                <input asp-for="Email">
-                <br>
-
-                <span asp-validation-for="Password"></span><br>
-                <label asp-for="Password"></label>
-                <input asp-for="Password">
-                <br>
-
-                <span asp-validation-for="Confirm"></span><br>
-                <label asp-for="Confirm"></label>
-                <input asp-for="Confirm">
-                <br>
-                <div id="lower">
-                    <input type='submit' value='Register'>
-                </div>
-            </form>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#feature">Features</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#portfolio">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about-us">Register</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
+        <!-- /.container-fluid -->
+    </nav>
 
+    
+    
+    
+    <!-- Start Home Page Slider -->
+    <section id="page-top">
+        <!-- Carousel -->
+        <div id="main-slide" class="carousel slide" data-ride="carousel">
 
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#main-slide" data-slide-to="0" class="active"></li>
+                <li data-target="#main-slide" data-slide-to="1"></li>
+                <li data-target="#main-slide" data-slide-to="2"></li>
+            </ol>
+            <!--/ Indicators end-->
 
-        <div id="login">
-            <form asp-action="Login" asp-controller="Home" method="post">
-                <label asp-for="Email"></label>
-                <input asp-for="Email">
-                <br>
-
-
-                <label asp-for="Password"></label>
-                <input asp-for="Password">
-                <br>
-                <div id="lower">
-                    <a href="/lol" id="forgot">Forgot Password</a>
-                    <input type='submit' value='Log In'>
+            <!-- Carousel inner -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="img-responsive" src="~/images/header-bg-1.jpg" alt="slider">
+                    <div class="slider-content">
+                        <div class="col-md-12 text-center">
+                            <h1 class="animated3">
+                                <span><strong>Wanna</strong>Bet</span>
+                            </h1>
+                            <p class="animated2">Social Wagering.<br>Challenge, Accept, and Win.</p>	
+                            <a href="#feature" class="page-scroll btn btn-primary animated1">Read More</a>
+                        </div>
+                    </div>
                 </div>
+                <!--/ Carousel item end -->
+                
+                <div class="item">
+                    <img class="img-responsive" src="~/images/header-back.png" alt="slider">
+                    
+                    <div class="slider-content">
+                        <div class="col-md-12 text-center">
+                            <h1 class="animated1">
+                    		  <span>Wager<strong>Responsibly</strong></span>
+                    	    </h1>
+                            <p class="animated2">Build Followers<br>Commit To Wagers.</p>
+                            <a href="#feature" class="page-scroll btn btn-primary animated3">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <!--/ Carousel item end -->
+                
+                <div class="item">
+                    <img class="img-responsive" src="~/images//galaxy.jpg" alt="slider">
+                    <div class="slider-content">
+                        <div class="col-md-12 text-center">
+                            <h1 class="animated2">
+                                <span>Connect <strong>Through Bets</strong></span>
+                            </h1>
+                            <p class="animated1">Follow Users<br>And Favorite Bets.</p>	
+                             <a class="animated3 slider btn btn-primary btn-min-block" href="#portfolio">Login</a><a class="animated3 slider btn btn-default btn-min-block" href="#about-us">Register</a>
+                                
+                        </div>
+                    </div>
+                </div>
+                <!--/ Carousel item end -->
+            </div>
+            <!-- Carousel inner end-->
 
-            </form>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#main-slide" data-slide="prev">
+                <span><i class="fa fa-angle-left"></i></span>
+            </a>
+            <a class="right carousel-control" href="#main-slide" data-slide="next">
+                <span><i class="fa fa-angle-right"></i></span>
+            </a>
+        </div>
+        <!-- /carousel -->
+    </section>
+    <!-- End Home Page Slider -->
+
+    
+    
+    <!-- Start Feature Section -->
+        <section id="feature" class="feature-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="feature">
+                            <i class="fa fa-magic"></i>
+                            <div class="feature-content">
+                                <h4>Place Bets</h4>
+                                <p>Challenge other users to wagers limited only by your imagination. Create a virtual contract that includes the bets timeframe, what the bet is about, and the stakes that are on the line.</p>
+                            </div>
+                        </div>
+                    </div><!-- /.col-md-3 -->
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="feature">
+                            <i class="fa fa-gift"></i>
+                            <div class="feature-content">
+                                <h4>Accept Bets</h4>
+                                <p>Accept bets challenged to you by other users for chances to publically win wagers and gain followers.</p>
+                            </div>
+                        </div>
+                    </div><!-- /.col-md-3 -->
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="feature">
+                            <i class="fa fa-wordpress"></i>
+                            <div class="feature-content">
+                                <h4>Follow Your Friends</h4>
+                                <p>Follow users and keep track of their betting habits, and gain followers as you wager.</p>
+                            </div>
+                        </div>
+                    </div><!-- /.col-md-3 -->
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="feature">
+                            <i class="fa fa-plug"></i>
+                            <div class="feature-content">
+                                <h4>Favorite Wagers</h4>
+                                <p>Favorite bets that catch your eye as not to miss their results.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            
+            </div><!-- /.container -->
+        </section>
+        <!-- End Feature Section -->
+    
+    
+    <!-- Start Call to Action Section -->
+    <section class="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Win Bets</br> Gain Followers </br>It Starts With One Post.</h1>
+                    <button type="submit" class="btn btn-primary">Wanna Bet?</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Call to Action Section -->
+    
+    
+    
+    <!-- Start Portfolio Section -->
+        <section id="portfolio" class="portfolio-section-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-title text-center">
+                            <h3>Login</h3>
+                            <p>Login and start wagering. If you are not an existing user, please register.</p>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <!-- Start Portfolio items -->
+                        <div id="login">
+                            <form asp-action="Login" asp-controller="Home" method="post">
+                                <label asp-for="Email"></label>
+                                <input asp-for="Email">
+                                <br>
+                
+                
+                                <label asp-for="Password"></label>
+                                <input asp-for="Password">
+                                <br>
+                                <div id="lower">
+                                    <a href="/lol" id="forgot">Forgot Password</a>
+                                    <input type='submit' value='Log In'>
+                                </div>
+                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Portfolio Section -->
+    
+    <!-- Start Portfolio Modal Section -->
+        <div class="section-modal modal fade" id="portfolio-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title text-center">
+                            <h3>Portfolio Details</h3>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-md-6">
+                            <img src="~/images/portfolio/img1.jpg" class="img-responsive" alt="..">
+                        </div>
+                        <div class="col-md-6">
+                            <img src="~/images/portfolio/img1.jpg" class="img-responsive" alt="..">
+                        </div>
+                        
+                    </div><!-- /.row -->
+                </div>                
+            </div>
+        </div>
+        <!-- End Portfolio Modal Section -->
+    
+    
+    <!-- Start About Us Section -->
+    <section id="about-us" class="about-us-section-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="section-title text-center">
+                            <h3>Register</h3>
+                            <p>New User? Register and get to wagering.</p>
+                        </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div id="register">
+                    <form asp-action="Register" asp-controller="Home" method="post">
+                        <span asp-validation-for="FirstName"></span><br>
+                        <label asp-for="FirstName"></label>
+                        <input asp-for="FirstName">
+                        <br>
+        
+                        <span asp-validation-for="LastName"></span><br>
+                        <label asp-for="LastName"></label>
+                        <input asp-for="LastName">
+                        <br>
+        
+                        <span asp-validation-for="Email"></span><br>
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email">
+                        <br>
+        
+                        <span asp-validation-for="Password"></span><br>
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password">
+                        <br>
+        
+                        <span asp-validation-for="Confirm"></span><br>
+                        <label asp-for="Confirm"></label>
+                        <input asp-for="Confirm">
+                        <br>
+                        <div id="lower">
+                            <input type='submit' value='Register'>
+                        </div>
+                    </form>
+                </div>
+                
+            </div><!-- /.row -->            
+            
+        </div><!-- /.container -->
+    </section>
+    <!-- End About Us Section -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-contact-info">
+                        <h4>Contact info</h4>
+                        <ul>
+                            <li><strong>Github :</strong> our_github_repo_here</li>
+                            <li><strong>Phone :</strong> +8801-6778776</li>
+                            <li><strong>Mobile :</strong> +8801-45565378</li>
+                            <li><strong>Web :</strong> localhost</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-4">
+                </div>
+            </div>
+        </div>
+        <footer class="style-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <span class="copyright">Copyright &copy; <a href="http://guardiantheme.com">GuardinTheme</a> 2015</span>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="footer-social text-center">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="footer-link">
+                            <ul class="pull-right">
+                                <li><a href="#">Privacy Policy</a>
+                                </li>
+                                <li><a href="#">Terms of Use</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+
+    <div id="loader">
+        <div class="spinner">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
         </div>
     </div>
-    <script>
-        $(".selector").datepicker({
-            minDate: new Date()
-        });
-    </script>
 
+    
+
+    <!-- jQuery Version 2.1.1 -->
+    <script src="~/js/jquery-2.1.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~//js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="~/js/jquery.easing.1.3.js"></script>
+    <script src="~/js/classie.js"></script>
+    <script src="~/js/count-to.js"></script>
+    <script src="~/js/jquery.appear.js"></script>
+    <script src="~/js/cbpAnimatedHeader.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+	<script src="~/js/jquery.fitvids.js"></script>
+	<script src="~/js/styleswitcher.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="~/js/script.js"></script>
 
 </body>
 
