@@ -24,7 +24,6 @@ public class User
     [Compare("Password")]
     [DataType(DataType.Password)]
     public string Confirm {get;set;}
-    public string ProfilePic { get; set; }
     [InverseProperty("Better")]
     public List<Reserve> BetterBets { get; set; }
     [InverseProperty("Taker")]
