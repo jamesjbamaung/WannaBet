@@ -43,8 +43,16 @@
     <input type="submit" value="Post Message">
 </form>
 
+<h1>List of Bets made</h1>
 @foreach(var bet in ViewBag.userBets.BetterBets)
 {
     <h3>@bet.Bet.Title</h3>
     <p>@bet.Bet.Description</p>
+}
+
+<h1>List of Bets taken</h1>
+@foreach(var tak in ViewBag.userTakes.TakerTakes)
+{
+    <h3>@tak.Bet.Title</h3>
+    <p>@tak.Bet.Description</p>
 }
