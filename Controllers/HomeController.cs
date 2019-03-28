@@ -256,11 +256,19 @@ namespace WannaBet.Controllers
             dbContext.SaveChanges();
             return RedirectToAction("MyMessages", new { uid = umes.SenderId});
         }
-        [HttpGet("deleteusermessage/{uid}")]
-        public IActionResult DeleteUserMessage(int uid)
+        [HttpGet("senderdelete/{uid}")]
+        public IActionResult SenderDelete(int uid)
         {
             UserMessage delete = dbContext.UserMessages.FirstOrDefault(a => a.UserMessageId == uid);
-            dbContext.Remove(delete);
+            delete.SenderDelete = false;
+            dbContext.SaveChanges();
+            return RedirectToAction("MyMessages", new { uid = HttpContext.Session.GetInt32("userInSession") });
+        }
+            [HttpGet("receiverdelete/{uid}")]
+        public IActionResult ReceiverDelete(int uid)
+        {
+            UserMessage delete = dbContext.UserMessages.FirstOrDefault(a => a.UserMessageId == uid);
+            delete.ReceiverDelete = false;
             dbContext.SaveChanges();
             return RedirectToAction("MyMessages", new { uid = HttpContext.Session.GetInt32("userInSession") });
         }
