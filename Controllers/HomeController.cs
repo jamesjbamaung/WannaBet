@@ -147,6 +147,7 @@ namespace WannaBet.Controllers
         [HttpGet("bet/{bid}")]
         public IActionResult BetInfo(int bid)
         {
+            
             ViewBag.userId = HttpContext.Session.GetInt32("userInSession");
             ViewBag.thisBet = dbContext.Bets.Include(a => a.listOfParticipants).ThenInclude(b => b.Better).FirstOrDefault(i => i.BetId == bid);
             ViewBag.listOfMessages = dbContext.Bets.Include(c => c.listOfMessages).ThenInclude(d => d.User).ToList();
@@ -216,6 +217,7 @@ namespace WannaBet.Controllers
         {
             ViewBag.user = dbContext.Users.Include(a => a.listOfFollows).ThenInclude(b => b.Follower).FirstOrDefault(c => c.UserId == uid);
             ViewBag.userBets = dbContext.Users.Include(a => a.BetterBets).ThenInclude(b => b.Bet).FirstOrDefault(c => c.UserId == uid);
+            ViewBag.userTakes = dbContext.Users.Include(b => b.TakerTakes).ThenInclude(e => e.Taker).FirstOrDefault(f => f.UserId == uid);
             ViewBag.userInSession = dbContext.Users.FirstOrDefault(b => b.UserId == HttpContext.Session.GetInt32("userInSession"));
             return View();
         }
@@ -245,6 +247,7 @@ namespace WannaBet.Controllers
             return RedirectToAction("UserInfo", new { uid = num });
 
         }
+        
         [HttpPost("addusermessage")]
         public IActionResult AddUserMessage(UserMessage umes)
         {

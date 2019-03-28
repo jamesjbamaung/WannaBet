@@ -26,8 +26,9 @@
     <button><a href="/unfollow/@fid">UnFollow</a></button>
 }
 <h1>Send a Message</h1>
-@model UserMessage
 
+
+@model UserMessage
 <form asp-action="AddUserMessage" asp-controller="Home" method="post">
 
     <label asp-for="Info"></label>
@@ -36,15 +37,22 @@
 
     <input type="hidden" name="SenderDelete" value="true">
     <input type="hidden" name="ReceiverDelete" value="true">
-
     <input type="hidden" name="SenderId" value="@ViewBag.userInSession.UserId">
     <input type="hidden" name="ReceiverId" value="@ViewBag.user.UserId">
 
     <input type="submit" value="Post Message">
 </form>
 
+<h1>List of Bets made</h1>
 @foreach(var bet in ViewBag.userBets.BetterBets)
 {
     <h3>@bet.Bet.Title</h3>
     <p>@bet.Bet.Description</p>
+}
+
+<h1>List of Bets taken</h1>
+@foreach(var tak in ViewBag.userTakes.TakerTakes)
+{
+    <h3>@tak.Bet.Title</h3>
+    <p>@tak.Bet.Description</p>
 }
