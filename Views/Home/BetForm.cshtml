@@ -2,6 +2,11 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #new_bet_form{
+            margin-left: 40%;
+        }
+    </style>
 </head>
 <h1>Propose a New Bet!</h1>
 <p><a href="/logout">Logout</a></p>
@@ -50,7 +55,7 @@
 <span asp-validation-for="Title"></span><br>
 <span asp-validation-for="Description"></span><br>
 <span asp-validation-for="ClosingDate"></span><br>
-<form asp-action="AddBet" asp-controller="Home" method="post">
+<form id="new_bet_form" asp-action="AddBet" asp-controller="Home" method="post">
 
     <label asp-for="Title"></label>
     <input asp-for="Title">
