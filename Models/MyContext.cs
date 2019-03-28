@@ -13,5 +13,6 @@ namespace WannaBet.Models
         public DbSet<Message> Messages { get; set; }
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<UserMessage> UserMessages { get; set; }
     }
 }

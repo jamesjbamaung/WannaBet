@@ -24,6 +24,7 @@ public class User
     [Compare("Password")]
     [DataType(DataType.Password)]
     public string Confirm {get;set;}
+
     [InverseProperty("Better")]
     public List<Reserve> BetterBets { get; set; }
     [InverseProperty("Taker")]
@@ -32,6 +33,10 @@ public class User
     public List<Follow> listOfFollowers { get; set; }
     [InverseProperty("Followed")]
     public List<Follow> listOfFollows { get; set; }
+    [InverseProperty("Sender")]
+    public List<UserMessage> listOfSentMessages { get; set; }
+    [InverseProperty("Receiver")]
+    public List<UserMessage> listOfReceivedMessages { get; set; }
     public List<Message> listOfMessages { get; set; }
     public List<Favorite> listOfFavorites { get; set; }
     public DateTime CreatedAt {get;set;} = DateTime.Now;
