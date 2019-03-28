@@ -34,6 +34,9 @@
     <input asp-for="Info">
     <br>
 
+    <input type="hidden" name="SenderDelete" value="true">
+    <input type="hidden" name="ReceiverDelete" value="true">
+
     <input type="hidden" name="SenderId" value="@ViewBag.userInSession.UserId">
     <input type="hidden" name="ReceiverId" value="@ViewBag.user.UserId">
 

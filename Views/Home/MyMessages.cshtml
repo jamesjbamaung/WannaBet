@@ -58,14 +58,22 @@
 <h1>Messages Sent</h1>
 @foreach(var mes in ViewBag.listOfMySentMessages)
 {
-    <h5>@mes.Info</h5>
-    <a href="/deleteusermessage/@mes.UserMessageId">Delete Message</a>
+    @if(mes.SenderDelete == true)
+    {
+        <h5>@mes.Info</h5>
+        <a href="/senderdelete/@mes.UserMessageId">Delete Message</a>
+    }
+
 }
 
 <h1>Messages Received</h1>
 @foreach(var rec in ViewBag.listOfMyReceivedMessages)
 {
-    <h5>@rec.Sender.FirstName</h5>
-    <p>@rec.Info</p>
-    <a href="/deleteusermessage/@rec.UserMessageId">Delete Message</a>
+    @if(rec.ReceiverDelete == true)
+    {
+        <h5>@rec.Sender.FirstName</h5>
+        <p>@rec.Info</p>
+        <a href="/receiverdelete/@rec.UserMessageId">Delete Message</a>
+    }
+
 }
