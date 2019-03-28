@@ -245,6 +245,7 @@ namespace WannaBet.Controllers
             return RedirectToAction("UserInfo", new { uid = num });
 
         }
+        
         [HttpPost("addusermessage")]
         public IActionResult AddUserMessage(UserMessage umes)
         {

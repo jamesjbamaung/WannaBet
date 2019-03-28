@@ -5,6 +5,7 @@ using System.Collections.Generic;
     
 public class UserMessage
 {
+    
     // No other fields!
     public int UserMessageId { get; set; }
     public string Info { get; set; }
