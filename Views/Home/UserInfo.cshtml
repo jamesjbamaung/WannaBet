@@ -1,4 +1,3 @@
-@model Follow
 <h1>User Info Page</h1>
 <h3>@ViewBag.user.FirstName @ViewBag.user.LastName</h3>
 <h3>Number of Followers: @ViewBag.user.listOfFollows.Count</h3>
@@ -19,17 +18,27 @@
 }
 @if(action == false)
 {
-    <form asp-action="AddFollow" asp-controller="Home" method="post">
-    <input type="hidden" name="FollowerId" value="@ViewBag.userInSession.UserId">
-    <input type="hidden" name="FollowedId" value="@ViewBag.user.UserId">
-    <input type="submit" value="Follow">
-    </form>
+
+    <button><a href="/addfollow/@ViewBag.userInSession.UserId/@ViewBag.user.UserId">UnFollow</a></button>
 }
 @if(action == true)
 {
     <button><a href="/unfollow/@fid">UnFollow</a></button>
 }
+<h1>Send a Message</h1>
+@model UserMessage
 
+<form asp-action="AddUserMessage" asp-controller="Home" method="post">
+
+    <label asp-for="Info"></label>
+    <input asp-for="Info">
+    <br>
+
+    <input type="hidden" name="SenderId" value="@ViewBag.userInSession.UserId">
+    <input type="hidden" name="ReceiverId" value="@ViewBag.user.UserId">
+
+    <input type="submit" value="Post Message">
+</form>
 
 @foreach(var bet in ViewBag.userBets.BetterBets)
 {
