@@ -1,6 +1,20 @@
-
-
+   <head>
+       <style>
+           #bet_info{
+               margin-left: 30%;
+           }
+           #message_display{
+               margin-left: 30%;
+               display: block;
+           }
+           #add_message_form{
+               margin-left: 30%;
+               display: block;
+           }
+       </style>
+   </head>
     <!-- Navigation -->
+
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -39,27 +53,31 @@
         <!-- /.container-fluid -->
     </nav>
 
-<h1>Bet Info Page</h1>
-<h3>Title:</h3>
-<h6>@ViewBag.thisBet.Title</h6>
-<h3>Description:</h3>
-<h6>@ViewBag.thisBet.Description</h6>
-<h3>Amount:</h3>
-<h6>@ViewBag.thisBet.Amount</h6>
-<h3>Closing Date:</h3>
-<h6>@ViewBag.thisBet.ClosingDate</h6>
-<h3>Originator:</h3>
-<h6>@ViewBag.thisBet.User.FirstName @ViewBag.thisBet.User.LastName</h6>
-<h1>Add Bets To Favorites</h1>
-<button><a href="/addfavorite/@ViewBag.thisBet.BetId/@ViewBag.userId">Favorite</a></button>
-<h1>List of Messages</h1>
-<table>
-  <tr>
-    <th>Message</th>
-    <th>Post Time</th>
-    <th>Author</th>
-    <th>Action</th>
-  </tr>
+<div id="bet_info">
+    <h1>Bet Info Page</h1>
+    <h3>Title:</h3>
+    <h6>@ViewBag.thisBet.Title</h6>
+    <h3>Description:</h3>
+    <h6>@ViewBag.thisBet.Description</h6>
+    <h3>Amount:</h3>
+    <h6>@ViewBag.thisBet.Amount</h6>
+    <h3>Closing Date:</h3>
+    <h6>@ViewBag.thisBet.ClosingDate</h6>
+    <h3>Originator:</h3>
+    <h6>@ViewBag.thisBet.User.FirstName @ViewBag.thisBet.User.LastName</h6>
+    <h1>Add Bets To Favorites</h1>
+    <button><a href="/addfavorite/@ViewBag.thisBet.BetId/@ViewBag.userId">Favorite</a></button>
+</div>
+
+<div id="message_display">
+    <h1>List of Messages</h1>
+    <table>
+    <tr>
+        <th>Message</th>
+        <th>Post Time</th>
+        <th>Author</th>
+        <th>Action</th>
+    </tr>
 
   @foreach(var mes in ViewBag.listOfMessages)
   { 
@@ -87,8 +105,9 @@
   }
 
 </table>
+</div>
 
-
+<div id="add_message_form">
 <h1>Add a Message</h1>
 @model Message
 <span asp-validation-for="Contents"></span><br>
@@ -103,3 +122,4 @@
 
     <input type="submit" value="Post Message">
 </form>
+</div>
