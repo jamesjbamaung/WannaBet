@@ -179,7 +179,7 @@
         <div class="row">
             <div class="col-sm-6 col-md-6">
                 <div class="alert-message alert-message-success">
-                    <h1>List of my sent messages</h1>
+                    <h1>Messages Sent</h1>
                     @foreach(var mes in ViewBag.listOfMySentMessages)
                     {
                     <h5>@mes.Info</h5>
@@ -188,7 +188,7 @@
                 </div>
                 <div class="col-sm-6 col-md-6">
                     <div class="alert-message alert-message-danger">
-                        <h1>List of my received messages</h1>
+                        <h1>Messages Received</h1>
                         @foreach(var rec in ViewBag.listOfMyReceivedMessages)
                         {
                         <h5>@rec.Sender.FirstName</h5>
