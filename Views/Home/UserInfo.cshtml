@@ -16,7 +16,7 @@
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container box_1620">
-                    <!-- Brand and toggle get grouped for better mobile display -->
+                    Brand and toggle get grouped for better mobile display
                     <!-- <a class="navbar-brand logo_h" href="UserInfo.cshtml"><img src="images/logo.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -61,7 +61,8 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -117,11 +118,11 @@
                             <li><a href="#"><i class="lnr lnr-envelope"></i> james@gmail.com</a></li>
                             <li><a href="#"><i class="lnr lnr-home"></i> Chicago IL</a></li>
                         </ul>
-                        <!-- <ul class="list personal_social">
+                        <ul class="list personal_social">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul> -->
+                        </ul>
                     </div>
                     <div class="media-body">
 
@@ -176,13 +177,13 @@
                                                 }
                                                 @if(action == false)
                                                 {
-                                                
-                                                <button style= "background-color: #6382e6;"><a
+
+                                                <button style="background-color: #6382e6;"><a
                                                         href="/addfollow/@ViewBag.userInSession.UserId/@ViewBag.user.UserId">Follow</a></button>
                                                 }
                                                 @if(action == true)
                                                 {
-                                                <button style= "background: #6382e6;"><a
+                                                <button style="background: #6382e6;"><a
                                                         href="/unfollow/@fid">UnFollow</a></button>
                                                 }
                                             </div>
@@ -191,16 +192,19 @@
                                                 @model UserMessage
 
                                                 <form asp-action="AddUserMessage" asp-controller="Home" method="post">
-
-                                                    <label asp-for="Info"></label>
-                                                    <input asp-for="Info">
-                                                    <br>
-
-                                                    <input type="hidden" name="SenderId"
-                                                        value="@ViewBag.userInSession.UserId">
-                                                    <input type="hidden" name="ReceiverId" value="@ViewBag.user.UserId">
-
-                                                    <input type="submit" value="Post Message" style="background:#6382e6 ">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 form-group">
+                                                            <label asp-for="Info"></label>
+                                                            <input asp-for="Info">
+                                                            <br>
+                                                            <input type="hidden" name="SenderId"
+                                                                value="@ViewBag.userInSession.UserId">
+                                                            <input type="hidden" name="ReceiverId"
+                                                                value="@ViewBag.user.UserId">
+                                                            <input type="submit" value="Post Message"
+                                                                style="background:#6382e6; width: 100px;">
+                                                        </div>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
