@@ -318,6 +318,7 @@ namespace WannaBet.Controllers
             {
                 return RedirectToAction("Logout");
             }
+            ViewBag.id = HttpContext.Session.GetInt32("userInSession");
             ViewBag.listOfMySentMessages = dbContext.UserMessages.Include(c => c.Receiver).Where(a => a.SenderId == uid);
             ViewBag.listOfMyReceivedMessages = dbContext.UserMessages.Include(d => d.Sender).Where(b => b.ReceiverId == uid);
             return View();

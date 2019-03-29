@@ -85,16 +85,16 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a href="account/{@ViewBag.User.UserId}">Account</a>
+                        <a href="account/@ViewBag.userInSession.UserId">Account</a>
                     </li>
                     <li>
                         <a href="/betform">Propose Wager</a>
                     </li>
                     <li>
-                        <a href="/account">View Bets</a>
+                        <a href="/account/@ViewBag.userInSession.UserId">View Bets</a>
                     </li>
                     <li>
-                        <a href="/mymessages/@ViewBag.User.UserId">My Messages</a>
+                        <a href="/mymessages/@ViewBag.userInSession.UserId">My Messages</a>
                     </li>
                     <li>
                       <a href ="/logout">Logout</a>
