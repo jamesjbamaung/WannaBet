@@ -122,11 +122,11 @@
     }
     @if(val == 1)
     {
-      <td><a href="/deletebet/@bet.BetId">Delete   @val</a></td>
+      <td><a href="/deletebet/@bet.BetId">Delete </a></td>
     }
     else if(val == 0 && bet.listOfParticipants.Count < 1)
     {
-      <td><a href="/reservebet/@bet.BetId/@bet.UserId">Take it @val</a></td>
+      <td><a href="/reservebet/@bet.BetId/@bet.UserId">Take it </a></td>
     }
     else if(val == 0 && bet.listOfParticipants.Count > 0)
     {
@@ -134,7 +134,7 @@
     }
     else if(val == 2)
     {
-      <td><a href="/cancelreserve/@rid">Unreserve it @val</a></td>
+      <td><a href="/cancelreserve/@rid">Unreserve it </a></td>
     }
     
   </tr>
