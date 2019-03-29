@@ -15,10 +15,10 @@
             background-color: white;
         }
         .alert-message {
-            margin: 20px 0;
+            margin-left: 100px;
             padding: 20px;
             border-left: 3px solid #eee;
-            width: 600px;
+            width: 80%;
             margin-top: 80px;
             font-family: "Roboto", sans-serif;
         }
@@ -128,6 +128,12 @@
         .navbar-default .navbar-nav>.active>a:focus {
             color: #fff;
         }
+        #myTable {
+            width: 100%;
+        }
+        #myReceivedMessages {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -147,23 +153,23 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
                     <li>
 
-                        <a href="account/{@ViewBag.User.UserId}">Account</a>
+                        <a href="/account/@ViewBag.id">Account</a>
                     </li>
                     <li>
                         <a href="/betform">Propose Wager</a>
                     </li>
                     <li>
-                        <a href="/account">View Bets</a>
+                        <a href="/account/@ViewBag.id">View Bets</a>
                     </li>
                     <li>
-                        <a href="/mymessages/@ViewBag.User.UserId">My Messages</a>
+                        <a href="/mymessages/@ViewBag.id">My Messages</a>
                     </li>
                     <li>
                       <a href ="/logout">Logout</a>
@@ -176,7 +182,7 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-6">
+            <div class="col">
                 <div class="alert-message alert-message-success">
                     <h1>List of my sent messages</h1>
                         <table id="myTable">
@@ -201,7 +207,7 @@
                             }
                         </table>
                 </div>
-                <div class="col-sm-6 col-md-6">
+                <div class="col">
                     <div class="alert-message alert-message-danger">
                         <h1>List of my received messages</h1>
                         <table id="myReceivedMessages">
