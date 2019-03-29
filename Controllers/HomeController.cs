@@ -147,6 +147,11 @@ namespace WannaBet.Controllers
         [HttpGet("bet/{bid}")]
         public IActionResult BetInfo(int bid)
         {
+            if (HttpContext.Session.GetInt32("userInSession") == null)
+            {
+                return View("Index");
+            }
+
             ViewBag.userId = HttpContext.Session.GetInt32("userInSession");
             ViewBag.thisBet = dbContext.Bets.Include(a => a.listOfParticipants).ThenInclude(b => b.Better).FirstOrDefault(i => i.BetId == bid);
             ViewBag.listOfMessages = dbContext.Bets.Include(c => c.listOfMessages).ThenInclude(d => d.User).ToList();
@@ -166,6 +171,10 @@ namespace WannaBet.Controllers
         [HttpGet("reservebet/{bid}/{uid}")]
         public IActionResult ReserveBet(int bid, int uid)
         {
+            if (HttpContext.Session.GetInt32("userInSession") == null)
+            {
+                return View("Index");
+            }
             Bet getBet = dbContext.Bets.Include(a => a.listOfParticipants).ThenInclude(b => b.Better).FirstOrDefault(c => c.BetId == bid);
             User better = dbContext.Users.FirstOrDefault(d => d.UserId == uid);
             User taker = dbContext.Users.FirstOrDefault(e => e.UserId == HttpContext.Session.GetInt32("userInSession"));
@@ -190,18 +199,26 @@ namespace WannaBet.Controllers
         [HttpPost("addmessage")]
         public IActionResult AddMessage(Message mess)
         {
+            if (HttpContext.Session.GetInt32("userInSession") == null)
+            {
+                return View("Index");
+            }
             User thisUser = dbContext.Users.FirstOrDefault(a => a.UserId == mess.UserId);
             Bet thisBet = dbContext.Bets.FirstOrDefault(b => b.BetId == mess.BetId);
             mess.User = thisUser;
             mess.Bet = thisBet;
             dbContext.Add(mess);
             dbContext.SaveChanges();
-            
+
             return RedirectToAction("BetInfo", new { bid = mess.BetId });
         }
         [HttpGet("deletemessage/{mid}")]
         public IActionResult DeleteMessage(int mid)
         {
+            if (HttpContext.Session.GetInt32("userInSession") == null)
+            {
+                return View("Index");
+            }
             System.Console.WriteLine(mid);
             Message delete = dbContext.Messages.FirstOrDefault(a => a.MessageId == mid);
             int id = delete.BetId;
@@ -214,14 +231,23 @@ namespace WannaBet.Controllers
         [HttpGet("userinfo/{uid}")]
         public IActionResult UserInfo(int uid)
         {
+            if (HttpContext.Session.GetInt32("userInSession") == null)
+            {
+                return View("Index");
+            }
             ViewBag.user = dbContext.Users.Include(a => a.listOfFollows).ThenInclude(b => b.Follower).FirstOrDefault(c => c.UserId == uid);
             ViewBag.userBets = dbContext.Users.Include(a => a.BetterBets).ThenInclude(b => b.Bet).FirstOrDefault(c => c.UserId == uid);
+            ViewBag.userTakes = dbContext.Users.Include(b => b.TakerTakes).ThenInclude(e => e.Bet).FirstOrDefault(f => f.UserId == uid);
             ViewBag.userInSession = dbContext.Users.FirstOrDefault(b => b.UserId == HttpContext.Session.GetInt32("userInSession"));
             return View();
         }
         [HttpGet("addfollow/{werid}/{wedid}")]
         public IActionResult AddFollow(int werid, int wedid)
         {
+            if (HttpContext.Session.GetInt32("userInSession") == null)
+            {
+                return View("Index");
+            }
             Follow fol = new Follow();
             User follower = dbContext.Users.FirstOrDefault(a => a.UserId == werid);
             User followed = dbContext.Users.FirstOrDefault(b => b.UserId == wedid);
@@ -238,6 +264,10 @@ namespace WannaBet.Controllers
         [HttpGet("unfollow/{fid}")]
         public IActionResult UnFollow(int fid)
         {
+            if (HttpContext.Session.GetInt32("userInSession") == null)
+            {
+                return View("Index");
+            }
             Follow delete = dbContext.Follows.FirstOrDefault(a => a.FollowId == fid);
             int num = delete.FollowedId;
             dbContext.Remove(delete);
@@ -245,28 +275,49 @@ namespace WannaBet.Controllers
             return RedirectToAction("UserInfo", new { uid = num });
 
         }
+
         [HttpPost("addusermessage")]
         public IActionResult AddUserMessage(UserMessage umes)
         {
+            if (HttpContext.Session.GetInt32("userInSession") == null)
+            {
+                return View("Index");
+            }
             User sender = dbContext.Users.FirstOrDefault(a => a.UserId == umes.SenderId);
             User receiver = dbContext.Users.FirstOrDefault(a => a.UserId == umes.ReceiverId);
             umes.Sender = sender;
             umes.Receiver = receiver;
             dbContext.Add(umes);
             dbContext.SaveChanges();
-            return RedirectToAction("MyMessages", new { uid = umes.SenderId});
+            return RedirectToAction("MyMessages", new { uid = umes.SenderId });
         }
-        [HttpGet("deleteusermessage/{uid}")]
-        public IActionResult DeleteUserMessage(int uid)
+        [HttpGet("senderdelete/{uid}")]
+        public IActionResult SenderDelete(int uid)
         {
             UserMessage delete = dbContext.UserMessages.FirstOrDefault(a => a.UserMessageId == uid);
-            dbContext.Remove(delete);
+            delete.SenderDelete = false;
+            dbContext.SaveChanges();
+            return RedirectToAction("MyMessages", new { uid = HttpContext.Session.GetInt32("userInSession") });
+        }
+        [HttpGet("receiverdelete/{uid}")]
+        public IActionResult ReceiverDelete(int uid)
+        {
+            UserMessage delete = dbContext.UserMessages.FirstOrDefault(a => a.UserMessageId == uid);
+            delete.ReceiverDelete = false;
             dbContext.SaveChanges();
             return RedirectToAction("MyMessages", new { uid = HttpContext.Session.GetInt32("userInSession") });
         }
         [HttpGet("mymessages/{uid}")]
         public IActionResult MyMessages(int uid)
         {
+            if (HttpContext.Session.GetInt32("userInSession") == null)
+            {
+                return View("Index");
+            }
+            if(HttpContext.Session.GetInt32("userInSession") != uid)
+            {
+                return RedirectToAction("Logout");
+            }
             ViewBag.listOfMySentMessages = dbContext.UserMessages.Include(c => c.Receiver).Where(a => a.SenderId == uid);
             ViewBag.listOfMyReceivedMessages = dbContext.UserMessages.Include(d => d.Sender).Where(b => b.ReceiverId == uid);
             return View();

@@ -5,39 +5,138 @@
       border-collapse: collapse;
       width: 100%;
     }
-
     td,
     th {
       border: 1px solid #dddddd;
       text-align: left;
       padding: 8px;
     }
-
     tr:nth-child(even) {
       background-color: #dddddd;
     }
   </style>
 </head>
-<h1>Welocome to the Activity Board</h1>
-<p><a href="/logout">Logout</a></p>
-<button><a href="/betform">Make a Bet</a></button>
-<h2>Hello @ViewBag.User.FirstName</h2>
+   <!-- Styleswitcher
+================================================== -->
+        <div class="colors-switcher">
+            <a id="show-panel" class="hide-panel"><i class="fa fa-tint"></i></a>        
+                <ul class="colors-list">
+                    <li><a title="Light Red" onClick="setActiveStyleSheet('light-red'); return false;" class="light-red"></a></li>
+                    <li><a title="Blue" class="blue" onClick="setActiveStyleSheet('blue'); return false;"></a></li>
+                    <li class="no-margin"><a title="Light Blue" onClick="setActiveStyleSheet('light-blue'); return false;" class="light-blue"></a></li>
+                    <li><a title="Green" class="green" onClick="setActiveStyleSheet('green'); return false;"></a></li>
+                    
+                    <li class="no-margin"><a title="light-green" class="light-green" onClick="setActiveStyleSheet('light-green'); return false;"></a></li>
+                    <li><a title="Yellow" class="yellow" onClick="setActiveStyleSheet('yellow'); return false;"></a></li>
+                    
+                </ul>
 
-<table>
+        </div>  
+<!-- Styleswitcher End
+================================================== -->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Wanna Bet?</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a href="account/{id}">Account</a>
+                    </li>
+                    <li>
+                        <a href="/betform">Propose Bet</a>
+                    </li>
+                    <li>
+                        <a href="/account">View Bets</a>
+                    </li>
+                    <li>
+                        <a href="/mymessages">My Messages</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Wanna Bet?</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a href="account/{@ViewBag.User.UserId}">Account</a>
+                    </li>
+                    <li>
+                        <a href="/betform">Propose Bet</a>
+                    </li>
+                    <li>
+                        <a href="/account">View Bets</a>
+                    </li>
+                    <li>
+                        <a href="/mymessages/@ViewBag.User.UserId">My Messages</a>
+                    </li>
+                    <li>
+                      <a href ="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+<h1>Welcome to the Betting Board</h1>
+<h2>Hello @ViewBag.User.FirstName</h2>
+<table id="myTable">
   <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Amount</th>
-    <th>Originator</th>
-    <th>Closing Date</th>
-    <th>Reserve Count</th>
+    <th onclick="sortTable(0)">Title</th>
+    <th onclick="sortTable(1)">Description</th>
+    <th onclick="sortTable(2)">Amount</th>
+    <th onclick="sortTable(3)">Originator</th>
+    <th onclick="sortTable(4)">Closing Date</th>
+    <th onclick="sortTable(5)">Reserve Count</th>
     <th>Reserve</th>
   </tr>
+
 
   @foreach(var bet in ViewBag.AllBets)
   {
     int val = 0;
     int rid = 0;
+    @if(bet.ClosingDate > DateTime.Now)
+    {
   <tr>
     <td><a href="/bet/@bet.BetId">@bet.Title</a></td>
     <td>@bet.Description</td>
@@ -57,23 +156,87 @@
         rid = user.ReserveId;
       }
     }
-    @if(val == 0)
+    @if(bet.UserId == ViewBag.id)
     {
-      <td><a href="/reservebet/@bet.BetId/@bet.UserId">Take it</a></td>
+      val = 1;
     }
-    else if(val == 1)
+    @if(val == 1)
     {
-      <td><a href="/deletebet/@bet.BetId">Delete</a></td>
+      <td><a href="/deletebet/@bet.BetId">Delete   @val</a></td>
+    }
+    else if(val == 0 && bet.listOfParticipants.Count < 1)
+    {
+      <td><a href="/reservebet/@bet.BetId/@bet.UserId">Take it @val</a></td>
+    }
+    else if(val == 0 && bet.listOfParticipants.Count > 0)
+    {
+      <td>Bet Taken @val</td>
     }
     else if(val == 2)
     {
-      <td><a href="/cancelreserve/@rid">Unreserve it</a></td>
+      <td><a href="/cancelreserve/@rid">Unreserve it @val</a></td>
     }
     
   </tr>
-
-
-
+    }
   }
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+
+
 
 </table>
