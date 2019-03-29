@@ -184,12 +184,16 @@
                             </tr>
                             @foreach(var rec in ViewBag.listOfMySentMessages)
                             {
-                            <tr>
-                                <td>@rec.Receiver.FirstName</td>
-                                <td>@rec.CreatedAt</td>
-                                <td>@rec.Info</td>
-                                <td><a href="/deleteusermessage/@rec.UserMessageId">Delete Message</a></td>
-                            </tr>
+                                @if(rec.SenderDelete == true)
+                                {
+                                    <tr>
+                                        <td>@rec.Receiver.FirstName</td>
+                                        <td>@rec.CreatedAt</td>
+                                        <td>@rec.Info</td>
+                                        <td><a href="/senderdelete/@rec.UserMessageId">Delete Message</a></td>
+                                    </tr>
+                                }
+
                             }
                         </table>
                 </div>
@@ -205,12 +209,16 @@
                             </tr>
                             @foreach(var rec in ViewBag.listOfMyReceivedMessages)
                             {
-                            <tr>
-                                <td>@rec.Sender.FirstName</td>
-                                <td>@rec.CreatedAt</td>
-                                <td>@rec.Info</td>
-                                <td><a href="/deleteusermessage/@rec.UserMessageId">Delete Message</a></td>
-                            </tr>
+                                @if(rec.ReceiverDelete == true)
+                                {
+                                    <tr>
+                                        <td>@rec.Sender.FirstName</td>
+                                        <td>@rec.CreatedAt</td>
+                                        <td>@rec.Info</td>
+                                        <td><a href="/receiverdelete/@rec.UserMessageId">Delete Message</a></td>
+                                    </tr>
+                                }
+
                             }
                         </table>
                             
