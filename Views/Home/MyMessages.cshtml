@@ -1,23 +1,121 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-md-6">
-            <div class="alert-message alert-message-success">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/jquery-1.11.1.min.js"></script>
+
+    <style>
+        .alert-message {
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 3px solid #eee;
+            width: 600px;
+        }
+
+        .alert-message h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .alert-message p:last-child {
+            margin-bottom: 0;
+        }
+
+        .alert-message code {
+            background-color: #fff;
+            border-radius: 3px;
+        }
+
+        .alert-message-success {
+            background-color: #F4FDF0;
+            border-color: #766dff;
+        }
+
+        .alert-message-success h4 {
+            color: #766dff;
+        }
+
+        .alert-message-danger {
+            background-color: #fdf7f7;
+            border-color: #d9534f;
+        }
+
+        .alert-message-danger h4 {
+            color: #d9534f;
+        }
+
+        .alert-message-warning {
+            background-color: #fcf8f2;
+            border-color: #f0ad4e;
+        }
+
+        .alert-message-warning h4 {
+            color: #f0ad4e;
+        }
+
+        .alert-message-info {
+            background-color: #f4f8fa;
+            border-color: #5bc0de;
+        }
+
+        .alert-message-info h4 {
+            color: #5bc0de;
+        }
+
+        .alert-message-default {
+            background-color: #EEE;
+            border-color: #B4B4B4;
+        }
+
+        .alert-message-default h4 {
+            color: #000;
+        }
+
+        .alert-message-notice {
+            background-color: #FCFCDD;
+            border-color: #BDBD89;
+        }
+
+        .alert-message-notice h4 {
+            color: #444;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <div class="alert-message alert-message-success">
                     <h1>List of my sent messages</h1>
                     @foreach(var mes in ViewBag.listOfMySentMessages)
                     {
                     <h5>@mes.Info</h5>
                     <a href="/deleteusermessage/@mes.UserMessageId">Delete Message</a>
                     }
-
-                    <h1>List of my received messages</h1>
-                    @foreach(var rec in ViewBag.listOfMyReceivedMessages)
-                    {
-                    <h5>@rec.Sender.FirstName</h5>
-                    <p>@rec.Info</p>
-                    <a href="/deleteusermessage/@rec.UserMessageId">Delete Message</a>
-                    }
-                    Cool Notification Css Style</a></p>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="alert-message alert-message-danger">
+                        <h1>List of my received messages</h1>
+                        @foreach(var rec in ViewBag.listOfMyReceivedMessages)
+                        {
+                        <h5>@rec.Sender.FirstName</h5>
+                        <p>@rec.Info</p>
+                        <a href="/deleteusermessage/@rec.UserMessageId">Delete Message</a>
+                        }
+                        Cool Notification Css Style</a></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</body>
+
+</html>
