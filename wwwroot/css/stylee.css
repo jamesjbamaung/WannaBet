@@ -21,12 +21,19 @@ a {
 .media-body {
   width: 100% !important;
 }
+#formforuser {
+  margin-left:237px;
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
 
+
+}
 .row.m0 {
   margin: 0px; }
 
 body {
-  line-height: 26px;
+  line-height: 50px;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: normal;
@@ -45,7 +52,7 @@ button:focus {
   padding-right: 0px; }
 
 .p_120 {
-  padding-top: 120px;
+  padding-top: 40px;
   padding-bottom: 120px; }
 
 .p_100 {
@@ -285,7 +292,7 @@ button:focus {
     position: relative;
     bottom: -200px;
     background: #fff;
-    padding: 30px;
+    padding: 10px;
     box-shadow: 0px 20px 80px 0px rgba(153, 153, 153, 0.3); }
   .home_banner_area .banner_inner {
     position: relative;
@@ -576,7 +583,7 @@ h2 {
   font-size: 30px; }
 
 h3 {
-  font-size: 24px; }
+  font-size: 45px; }
 
 h4 {
   font-size: 18px; }
@@ -585,7 +592,9 @@ h5 {
   font-size: 16px; }
 
 h6 {
-  font-size: 14px; }
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal; }
 
 .typography h1, .typography h2, .typography h3, .typography h4, .typography h5, .typography h6 {
   color: #777777; }
@@ -797,7 +806,10 @@ h6 {
   background: #f9f9ff;
   border: 1px solid transparent;
   cursor: not-allowed; }
-
+/* .list personal_social {
+  display: inline;
+  vertical-align: top;
+} */
 .generic-blockquote {
   padding: 30px 50px 30px 30px;
   background: #fff;
@@ -1235,7 +1247,7 @@ h6 {
   color: #222222; }
 
 .primary-checkbox input:checked + label {
-  background: url(../img/elements/primary-check.png) no-repeat center center/cover;
+  background: url(../images/elements/primary-check.png) no-repeat center center/cover;
   border: none; }
 
 .confirm-checkbox {
@@ -1269,7 +1281,7 @@ h6 {
   border: 1px solid #f1f1f1; }
 
 .confirm-checkbox input:checked + label {
-  background: url(../img/elements/success-check.png) no-repeat center center/cover;
+  background: url(../images/elements/success-check.png) no-repeat center center/cover;
   border: none; }
 
 .disabled-checkbox {
@@ -1307,7 +1319,7 @@ h6 {
   z-index: 3; }
 
 .disabled-checkbox input:checked + label {
-  background: url(../img/elements/disabled-check.png) no-repeat center center/cover;
+  background: url(../images/elements/disabled-check.png) no-repeat center center/cover;
   border: none; }
 
 .primary-radio {
@@ -1341,7 +1353,7 @@ h6 {
   border: 1px solid #f1f1f1; }
 
 .primary-radio input:checked + label {
-  background: url(../img/elements/primary-radio.png) no-repeat center center/cover;
+  background: url(../images/elements/primary-radio.png) no-repeat center center/cover;
   border: none; }
 
 .confirm-radio {
@@ -1375,9 +1387,12 @@ h6 {
   border: 1px solid #f1f1f1; }
 
 .confirm-radio input:checked + label {
-  background: url(../img/elements/success-radio.png) no-repeat center center/cover;
+  background: url(../images/elements/success-radio.png) no-repeat center center/cover;
   border: none; }
-
+.d-flex profile-img half{
+  height: 500px;
+  width: 490px;
+}
 .disabled-radio {
   width: 16px;
   height: 16px;
@@ -1422,7 +1437,7 @@ h6 {
   padding: 0px; }
 
 .disabled-radio input:checked + label {
-  background: url(../img/elements/disabled-radio.png) no-repeat center center/cover;
+  background: url(../images/elements/disabled-radio.png) no-repeat center center/cover;
   border: none; }
 
 .default-select {
@@ -1628,6 +1643,45 @@ h6 {
     background: #766dff;
     color: #222222; }
 
+  
+.navbar-default {
+  border-color: transparent;
+  background-color: #222;
+}
+
+.navbar-default .navbar-brand {
+  font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+}
+
+.navbar-default .navbar-collapse {
+  border-color: rgba(255,255,255,.02);
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+
+
+.navbar-default .nav li a {
+  text-transform: uppercase;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #fff;
+  font-size: 12px;
+}
+
+
+.navbar-default .navbar-nav>.active>a {
+  border-radius: 0;
+  color: #fff;
+}
+
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+  color: #fff;
+}
+
 /* End Main Button Area css
 ============================================================================================ */
 /*---------------------------------------------------- */
@@ -1662,7 +1716,7 @@ h6 {
   border-radius: 5px; }
   .wel_item i {
     font-size: 24px;
-    background: linear-gradient(to right, #766dff 0%, #86e7ff 70%);
+    /* background: linear-gradient(to right, #766dff 0%, #86e7ff 70%); */
     /* -webkit-background-clip: text; */
     -webkit-text-fill-color: transparent; }
   .wel_item h4 {
@@ -1872,6 +1926,8 @@ h6 {
 ============================================================================================ */
 /* Personal Profile Area css
 ============================================================================================ */
+
+
 .profile_area .col-lg-7 {
   vertical-align: middle;
   align-self: center; }
@@ -1879,7 +1935,40 @@ h6 {
 .profile_inner {
   border-bottom: 1px solid #eeeeee; }
   .profile_inner .personal_text {
-  padding-left: 95px; }
+    border: 1px solid black;
+    display: inline-block;
+  /* padding-left: 95px;  */
+}
+.media {
+  display: inline-block;
+  padding: 10px;
+}
+.half {
+  box-sizing: border-box;
+  width:30%;
+  display: inline-block;
+  /* border: 2px solid red; */
+  display: inline-block;
+  vertical-align: top;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+}
+.sendmessage {
+  margin-left: 15px;
+  text-align: center;
+  padding-top: 60px;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+}
+.sendmessage input .submit_btn {
+  padding: 15px;
+  color: white !important;
+}
+
+.personal_text {
+  border: 1px solid black !important;
+  width: 20%;
+}
 
 .personal_text h6 {
   font-size: 14px;
@@ -1897,7 +1986,7 @@ h6 {
   margin-bottom: 20px;
   color: #222222; }
 .personal_text h3 {
-  font-size: 48px;
+  font-size: 30px;
   text-transform: uppercase;
   margin-bottom: 15px;
   color: #222222; }

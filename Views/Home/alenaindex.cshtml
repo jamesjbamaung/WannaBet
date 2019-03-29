@@ -18,8 +18,7 @@
 	<link rel="stylesheet" href="wwwroot/vendors/popup/magnific-popup.css">
 	<link rel="stylesheet" href="wwwroot/vendors/flaticon/flaticon.css">
 	<!-- main css -->
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/responsive.css">
+	
 </head>
 
 <body>
@@ -69,7 +68,21 @@
 		</div>
 	</header>
 	<!--================Header Menu Area =================-->
-
+	 <!-- Carousel inner -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="img-responsive" src="~/images/header-bg-1.jpg" alt="slider">
+                    <div class="slider-content">
+                        <div class="col-md-12 text-center">
+                            <h1 class="animated3">
+                                <span><strong>Wanna</strong>Bet</span>
+                            </h1>
+                            <p class="animated2">Social Wagering.<br>Challenge, Accept, and Win.</p>	
+                            <a href="#feature" class="page-scroll btn btn-primary animated1">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <!--/ Carousel item end -->
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
 		<div class="container box_1620">
@@ -82,7 +95,8 @@
 						<div class="media-body">
 							<div class="personal_text">
 								<h6>This is your profile page</h6>
-								<h3> @ViewBag.user.FirstName @ViewBag.user.LastName</h3>
+								<!-- <h3> @ViewBag.user.FirstName @ViewBag.user.LastName</h3>
+								<h3>Number of Followers: @ViewBag.user.listOfFollows.Count</h3> -->
 
 								<p>You will begin to realise why this exercise is called the Dickens Pattern (with
 									reference to the ghost showing Scrooge some different futures)</p>
@@ -373,22 +387,7 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/popper.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/lightbox/simpleLightbox.min.js"></script>
-	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-	<script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-	<script src="vendors/isotope/isotope.pkgd.min.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="vendors/popup/jquery.magnific-popup.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-	<script src="vendors/counter-up/jquery.counterup.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/theme.js"></script>
-	<script src="js/script.js"></script>
+	
 </body>
 
 </html>
