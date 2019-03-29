@@ -7,7 +7,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="images/favicon.png" type="image/png">
-    <title>MeetMe Personal</title>
+    <title>User Page</title>
+    <style>
+        body{
+            background-color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,12 +63,13 @@
     </header>  -->
 
 
+
+    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -79,16 +85,19 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#feature">Features</a>
+                        <a href="account/{@ViewBag.User.UserId}">Account</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#portfolio">Login</a>
+                        <a href="/betform">Propose Bet</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about-us">Register</a>
+                        <a href="/account">View Bets</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a href="/mymessages/@ViewBag.User.UserId">My Messages</a>
+                    </li>
+                    <li>
+                      <a href ="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -114,8 +123,7 @@
                         <!-- <h4>Number of Followers: </h4> -->
 
                         <ul class="list basic_info">
-                            <li><a href="#"><i class="lnr lnr-calendar-full"></i> 25st October, 1995</a></li>
-                            <li><a href="#"><i class="lnr lnr-phone-handset"></i> 02 (312) 6955 773</a></li>
+                            <li><a href="#"><i class="lnr lnr-calendar-full"></i>@ViewBag.User.CreatedAt</a></li>
                             <li><a href="#"><i class="lnr lnr-envelope"></i> james@gmail.com</a></li>
                             <li><a href="#"><i class="lnr lnr-home"></i> Chicago IL</a></li>
                         </ul>
@@ -138,7 +146,7 @@
                                                     <div class="wel_item">
                                                         <i class="lnr lnr-database"></i>
                                                         <h4>$2.5K</h4>
-                                                        <p>Total Donation</p>
+                                                        <p>Total Bet Earnings</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -214,7 +222,7 @@
                                         <div class="tools_expert">
                                             <div class="skill_main">
                                                 <div class="skill_item">
-                                                    <h4>Horse Racing <span class="counter">85</span>%</h4>
+                                                    <h4>Bets Won <span class="counter">85</span>%</h4>
                                                     <div class="progress_br">
                                                         <div class="progress">
                                                             <div class="progress-bar" role="progressbar"
@@ -224,7 +232,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="skill_item">
-                                                    <h4>American Football <span class="counter">90</span>%</h4>
+                                                    <h4>Bets Lost <span class="counter">90</span>%</h4>
                                                     <div class="progress_br">
                                                         <div class="progress">
                                                             <div class="progress-bar" role="progressbar"
@@ -234,7 +242,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="skill_item">
-                                                    <h4>Boxing <span class="counter">70</span>%</h4>
+                                                    <h4>Winnings Earned <span class="counter">70</span>%</h4>
                                                     <div class="progress_br">
                                                         <div class="progress">
                                                             <div class="progress-bar" role="progressbar"
@@ -244,7 +252,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="skill_item">
-                                                    <h4>Basketball <span class="counter">95</span>%</h4>
+                                                    <h4>Winnings Lost <span class="counter">95</span>%</h4>
                                                     <div class="progress_br">
                                                         <div class="progress">
                                                             <div class="progress-bar" role="progressbar"
@@ -254,7 +262,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="skill_item">
-                                                    <h4>Hockey <span class="counter">75</span>%</h4>
+                                                    <h4>Time As User <span class="counter">75</span>%</h4>
                                                     <div class="progress_br">
                                                         <div class="progress">
                                                             <div class="progress-bar" role="progressbar"
