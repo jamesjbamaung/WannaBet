@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +19,7 @@
             padding: 20px;
             border-left: 3px solid #eee;
             width: 600px;
-            margin-top:80px;
+            margin-top: 80px;
             font-family: "Roboto", sans-serif;
         }
 
@@ -91,50 +90,49 @@
         .alert-message-notice h4 {
             color: #444;
         }
-        
+
         .navbar-default {
-    border-color: transparent;
-    background-color: #222;
-}
+            border-color: transparent;
+            background-color: #222;
+        }
 
-.navbar-default .navbar-brand {
-    font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
-}
+        .navbar-default .navbar-brand {
+            font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+        }
 
-.navbar-default .navbar-collapse {
-    border-color: rgba(255,255,255,.02);
-}
+        .navbar-default .navbar-collapse {
+            border-color: rgba(255, 255, 255, .02);
+        }
 
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #fff;
-}
-
-
-.navbar-default .nav li a {
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: #fff;
-    font-size: 12px;
-}
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #fff;
+        }
 
 
-.navbar-default .navbar-nav>.active>a {
-    border-radius: 0;
-    color: #fff;
-}
+        .navbar-default .nav li a {
+            text-transform: uppercase;
+            font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #fff;
+            font-size: 12px;
+        }
 
-.navbar-default .navbar-nav>.active>a:hover,
-.navbar-default .navbar-nav>.active>a:focus {
-    color: #fff;
-}
+
+        .navbar-default .navbar-nav>.active>a {
+            border-radius: 0;
+            color: #fff;
+        }
+
+        .navbar-default .navbar-nav>.active>a:hover,
+        .navbar-default .navbar-nav>.active>a:focus {
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -155,6 +153,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
+
                         <a href="account/{@ViewBag.User.UserId}">Account</a>
                     </li>
                     <li>
@@ -180,27 +179,170 @@
             <div class="col-sm-6 col-md-6">
                 <div class="alert-message alert-message-success">
                     <h1>Messages Sent</h1>
-                    @foreach(var mes in ViewBag.listOfMySentMessages)
-                    {
-                    <h5>@mes.Info</h5>
-                    <a href="/deleteusermessage/@mes.UserMessageId">Delete Message</a>
-                    }
+                        <table id="myTable">
+                            <tr>
+                                <th onclick="sortTable(0)">To</th>
+                                <th onclick="sortTable(1)"> Date</th>
+                                <th onclick="sortTable(2)">Message</th>
+                                <th onclick="sortTable(3)">Action</th>
+                            </tr>
+                            @foreach(var rec in ViewBag.listOfMySentMessages)
+                            {
+                                @if(rec.SenderDelete == true)
+                                {
+                                    <tr>
+                                        <td>@rec.Receiver.FirstName</td>
+                                        <td>@rec.CreatedAt</td>
+                                        <td>@rec.Info</td>
+                                        <td><a href="/senderdelete/@rec.UserMessageId">Delete Message</a></td>
+                                    </tr>
+                                }
+
+                            }
+                        </table>
                 </div>
                 <div class="col-sm-6 col-md-6">
                     <div class="alert-message alert-message-danger">
                         <h1>Messages Received</h1>
-                        @foreach(var rec in ViewBag.listOfMyReceivedMessages)
-                        {
-                        <h5>@rec.Sender.FirstName</h5>
-                        <p>@rec.Info</p>
-                        <a href="/deleteusermessage/@rec.UserMessageId">Delete Message</a>
-                        }
-                        
+                        <table id="myReceivedMessages">
+                            <tr>
+                                <th onclick="sortTable(0)">From</th>
+                                <th onclick="sortTable(1)">Date</th>
+                                <th onclick="sortTable(2)">Message</th>
+                                <th onclick="sortTable(3)">Action</th>
+                            </tr>
+                            @foreach(var rec in ViewBag.listOfMyReceivedMessages)
+                            {
+                                @if(rec.ReceiverDelete == true)
+                                {
+                                    <tr>
+                                        <td>@rec.Sender.FirstName</td>
+                                        <td>@rec.CreatedAt</td>
+                                        <td>@rec.Info</td>
+                                        <td><a href="/receiverdelete/@rec.UserMessageId">Delete Message</a></td>
+                                    </tr>
+                                }
+
+                            }
+                        </table>
+                            
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myReceivedMessages");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+
 </body>
 
 </html>
